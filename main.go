@@ -15,6 +15,8 @@ func main() {
 	ins := flag.String("input", "./in.f64.data", "")
 	outs := flag.String("out", "./out.f64.data", "")
 	encodetarget := flag.String("data", "Hello World!", "")
+	symbolrate := flag.Int("srate", 5500, "Symbol rate in samples")
+
 	flag.Parse()
 
 	inf, err := os.OpenFile(*ins, os.O_RDONLY, 0644)
@@ -31,8 +33,7 @@ func main() {
 	sr := strings.NewReader(*encodetarget)
 	bitreader := bitstream.NewReader(sr)
 
-	Symbolrate := 11000
-	SamplesUntilChange := Symbolrate
+	SamplesUntilChange := *symbolrate
 	firstbit, _ := bitreader.ReadBit()
 	secondbit, _ := bitreader.ReadBit()
 	UpperFlip := bool(firstbit)
@@ -62,7 +63,7 @@ func main() {
 				fmt.Print("0")
 			}
 
-			SamplesUntilChange = Symbolrate
+			SamplesUntilChange = *symbolrate
 			bits++
 		}
 

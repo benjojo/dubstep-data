@@ -12,6 +12,7 @@ import (
 
 func main() {
 	ins := flag.String("input", "./in.f64.data", "")
+	symbolrate := flag.Int("srate", 5500, "Symbol rate in samples")
 	flag.Parse()
 
 	inf, err := os.OpenFile(*ins, os.O_RDONLY, 0644)
@@ -24,8 +25,7 @@ func main() {
 	bw.WriteBit(bitstream.Bit(false))
 	// fmt.Print("0")
 
-	Symbolrate := 11000
-	SamplesUntilChange := Symbolrate
+	SamplesUntilChange := *symbolrate
 	bits := 1
 	negscore := 0
 
@@ -45,9 +45,9 @@ func main() {
 
 		SamplesUntilChange--
 		if SamplesUntilChange == 0 {
-			rsp := negscore < 5000
+			rsp := negscore < (*symbolrate / 2)
 			if bits != 1 {
-				log.Printf("NS: %d | %v", negscore, bool(rsp))
+				// log.Printf("NS: %d | %v", negscore, bool(rsp))
 				bw.WriteBit(bitstream.Bit(rsp))
 				if rsp {
 					// fmt.Print("1")
@@ -57,7 +57,7 @@ func main() {
 			}
 
 			negscore = 0
-			SamplesUntilChange = Symbolrate
+			SamplesUntilChange = *symbolrate
 			bits++
 		}
 
