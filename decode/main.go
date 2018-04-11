@@ -24,11 +24,10 @@ func main() {
 	bw.WriteBit(bitstream.Bit(false))
 	// fmt.Print("0")
 
-	Symbolrate := 5500
+	Symbolrate := 11000
 	SamplesUntilChange := Symbolrate
 	bits := 1
 	negscore := 0
-	// revreader := make([]bool, 9)
 
 	for {
 		var raws float64
@@ -48,8 +47,7 @@ func main() {
 		if SamplesUntilChange == 0 {
 			rsp := negscore < 5000
 			if bits != 1 {
-				// revreader[bits%8] = rsp
-				// log.Printf("NS: %d | %v", negscore, bool(rsp))
+				log.Printf("NS: %d | %v", negscore, bool(rsp))
 				bw.WriteBit(bitstream.Bit(rsp))
 				if rsp {
 					// fmt.Print("1")

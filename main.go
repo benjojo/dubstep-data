@@ -33,11 +33,11 @@ func main() {
 
 	Symbolrate := 11000
 	SamplesUntilChange := Symbolrate
-	tb, _ := bitreader.ReadBit()
-	nb, _ := bitreader.ReadBit()
-	UpperFlip := bool(tb)
+	firstbit, _ := bitreader.ReadBit()
+	secondbit, _ := bitreader.ReadBit()
+	UpperFlip := bool(firstbit)
+	nextbit := bool(secondbit)
 	bits := 0
-	nextbit := bool(nb)
 
 	for {
 		var raws float64
