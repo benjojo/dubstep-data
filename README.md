@@ -16,7 +16,7 @@ The programs I wrote for the `Encoding data in dubstep drops` blog post: https:/
 ## How to run ##
 * Note: If you have not set your GOPATH correctly, it will not be able to perform the `go get` commmands
 
-Aqcuire repos:
+Acquire repos:
 ``` 
 go get github.com/dgryski/go-bitstream
 go get github.com/benjojo/dubstep-data
@@ -50,6 +50,14 @@ Move to the decode folder
 cd decode
 go build
 ffmpeg -i ../encoded-bassline.wav -f f64le -ar 44100 -ac 1 -y in.f64.data
-cat in.f64.data | tee sound | ./decode -input /dev/stdin
-./decode
+```
+To show steganograph:
+```
+mkfifo sound
+ffplay -f f64le -ar 44100 -ac 1 -i sound & cat in.f64.data | tee sound | ./decode -input /dev/stdin
+```
+Otherwise run `cat in.f64.data | tee sound | ./decode -input /dev/stdin`
+
+To view the decoded message:
+`./decode`
 ```
