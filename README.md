@@ -7,7 +7,7 @@ The programs I wrote for the `Encoding data in dubstep drops` blog post: https:/
 ## Packages Required ## 
 * [SoX (Sound Exchange)](http://sox.sourceforge.net/) -  Convert various formats of computer audio files to other formats. Also applies various effects to these sound files
     * `sudo apt-get install sox`
-* [Google Golang](http://sox.sourceforge.net/) -  Google's Go Language
+* [Google Golang](https://golang.org/) -  Google's Go Language
     * `sudo apt-get install golang`
     * Note: You will need to set the GOPATH
 * [FFMPEG](https://ffmpeg.zeranoe.com/) - Decode, encode, filter and play files
